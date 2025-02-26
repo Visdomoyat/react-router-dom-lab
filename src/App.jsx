@@ -11,19 +11,23 @@ import './App.css'
 function App() {
 const [mail, setMail] = useState([])
 
-const addMail = (newMaillData) => {
-newMaillData._id = mail.length + 1
-setMail([...mail, newMaillData])
+const addMail = (newMailData) => {
+  console.log('New Mail Data Receive', newMailData);
+  if(!newMailData.boxholder) {
+    console.warn('No boxholder found in newMailData')
+  }
+const newMail = {...newMailData, _id: mail.length + 1}
+setMail([...mail, newMail])
 }
   return (
     <>
     <h1>🏤Post Office</h1>
-    
+
       <Navbar />
       
       <Routes>
         <Route
-        part='/' 
+        path='/' 
         element= {<h2>Mail Boxes</h2>}
         />
 
@@ -38,7 +42,7 @@ setMail([...mail, newMaillData])
         element={<MailBoxDetail mail={mail} />}    
         /> 
 
-        <Route path='/mailboxes/newmail' 
+        <Route path='/newmail' 
         element={<NewMailForm addMail={addMail} />}   
         />
       </Routes>
