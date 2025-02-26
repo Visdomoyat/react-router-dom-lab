@@ -1,24 +1,34 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
+const initialState ={
+    boxholder: '',
+    size: ''
+}
 function NewMailForm({addMail}) {
 
-    const [formData, setFormData] = useState('')
-    const [selectedOption, setSelectedOption] = useState('')
+    const [formData, setFormData] = useState(initialState)
+   
 
 
     const navigate = useNavigate();
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        addMail(formData, selectedOption);
-        setFormData('');
-        setSelectedOption('');
+
+        if (!formData.boxholder || !formData.size) {
+            alert('Please fill in all fields.')
+        }
+        console.log('submitting Mial:', formData)
+
+        addMail(formData);
+        setFormData(initialState);
+    
         navigate('/mailboxes');
     }
 
     const handleChange = ({ target }) => {
-        setSelectedOption(target.value)
+       
         setFormData({ ...formData, [target.name]: target.value })
     }
 
@@ -29,13 +39,13 @@ function NewMailForm({addMail}) {
                 <label htmlFor="name">Enter a Boxholder</label>
                 <input
                     type="text"
-                    name='name'
+                    name='boxholder'
                     value={formData.boxholder}
                     placeholder="Boxholder name"
                     onChange={handleChange}
                 />
                 <label htmlFor="size">Select a Box Size</label>
-                <select name="size" id="options" value={selectedOption} onChange={handleChange}>
+                <select name="size" id="options" value={formData.size} onChange={handleChange}>
                     <option value="">Select an option</option>
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>
