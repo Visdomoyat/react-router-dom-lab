@@ -8,7 +8,7 @@ function Navbar() {
         <div className="navbarMenu">
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/mailboxes'>Mailboxes</NavLink>
-            <NavLink to='/newmail'>New Mailbox</NavLink>
+            <NavLink to='/mailboxes/newmail'>New Mailbox</NavLink>
         </div>
     </div>
   )
