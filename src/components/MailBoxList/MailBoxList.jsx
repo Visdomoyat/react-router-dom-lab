@@ -1,6 +1,20 @@
 import { Link } from "react-router-dom"
+import styled from "styled-components"
 
+const Li = styled.li`
+list-style: none;
+text-align: center;
+margin: 30px auto;
 
+`
+const Lilink = styled(Link)`
+background-color: #004B87;
+text-decoration: none;
+padding: 10px;
+border-radius: 10px;
+color: white;
+
+`
 
 function MailBoxList(props) {
   
@@ -13,11 +27,11 @@ function MailBoxList(props) {
             <p>No mail available</p>
           ) : (
             props.mail.map((currentMail) => (
-              <li key={currentMail._id}>
-                <Link to={`/mailboxes/${currentMail._id}`}>
-                  {currentMail.boxholder}
-                </Link>
-              </li>
+              <Li key={currentMail._id}>
+                <Lilink to={`/mailboxes/${currentMail._id}`}>
+                  ✉️  {currentMail.boxholder}
+                </Lilink>
+              </Li>
             ))
           )}
 
